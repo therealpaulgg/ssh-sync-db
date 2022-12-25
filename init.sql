@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS master_keys(
 );
 
 
-CREATE TABLE IF NOT EXISTS ssh_config(
+CREATE TABLE IF NOT EXISTS ssh_configs(
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
     machine_id uuid NOT NULL,
