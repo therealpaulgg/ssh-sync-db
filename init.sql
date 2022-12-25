@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS machines(
     name VARCHAR(255) NOT NULL,
     public_key BYTEA not null,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    unique (user_id, name)
 );
 
 CREATE TABLE IF NOT EXISTS master_keys(
@@ -23,7 +24,8 @@ CREATE TABLE IF NOT EXISTS master_keys(
     data BYTEA NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (machine_id) REFERENCES machines(id)
+    FOREIGN KEY (machine_id) REFERENCES machines(id),
+    unique (user_id, machine_id)
 );
 
 
@@ -33,7 +35,8 @@ CREATE TABLE IF NOT EXISTS ssh_config(
     machine_id uuid NOT NULL,
     host VARCHAR(255) NOT NULL,
     values JSON NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    unique (user_id, machine_id, host)
 );
 
 CREATE TABLE IF NOT EXISTS ssh_keys(
@@ -42,5 +45,6 @@ CREATE TABLE IF NOT EXISTS ssh_keys(
     filename VARCHAR(255) NOT NULL,
     data BYTEA NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    unique (user_id, filename)
 );
