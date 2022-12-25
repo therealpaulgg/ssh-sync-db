@@ -1,0 +1,14 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: sshsync
+      POSTGRES_PASSWORD: insecure-password
+      POSTGRES_DB: sshsync
+    ports:
+      - 5432:5432
