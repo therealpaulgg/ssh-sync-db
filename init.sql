@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS machines(
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
     name VARCHAR(255) NOT NULL,
+    public_key BYTEA not null,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
