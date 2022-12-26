@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS ssh_configs(
     machine_id uuid NOT NULL,
     host VARCHAR(255) NOT NULL,
     values JSON NOT NULL,
+    identity_file VARCHAR(255),
     PRIMARY KEY (id),
     unique (user_id, machine_id, host)
 );
