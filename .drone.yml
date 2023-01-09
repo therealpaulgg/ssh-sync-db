@@ -1,0 +1,14 @@
+kind: pipeline
+name: build
+
+steps:
+  - name: docker
+    image: plugins/docker:linux-amd64
+    settings:
+      username:
+        from_secret: DOCKER_USER
+      password:
+        from_secret: DOCKER_TOKEN
+      tags: ${DRONE_COMMIT}
+      repo: therealpaulgg/ssh-sync-db
+      insecure: false
