@@ -2,7 +2,7 @@ alter table ssh_configs
 alter column values type jsonb using values::jsonb;
 
 alter table ssh_configs
-add column identity_files jsonb not null default '[]';
+add column identity_files jsonb;
 
 -- Take all ssh_configs pre-existing identity_file column and convert to array
 update ssh_configs
