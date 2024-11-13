@@ -20,12 +20,11 @@ CREATE TABLE IF NOT EXISTS machines(
 CREATE TABLE IF NOT EXISTS ssh_configs(
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
-    machine_id uuid NOT NULL,
     host VARCHAR(255) NOT NULL,
     values JSONB NOT NULL,
     identity_files JSONB,
     PRIMARY KEY (id),
-    unique (user_id, machine_id, host)
+    unique (user_id, host)
 );
 
 CREATE TABLE IF NOT EXISTS ssh_keys(
