@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS ssh_keys(
     user_id uuid NOT NULL,
     filename VARCHAR(255) NOT NULL,
     data BYTEA NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     unique (user_id, filename)
