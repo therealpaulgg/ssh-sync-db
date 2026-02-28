@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS machines(
     user_id uuid NOT NULL,
     name VARCHAR(255) NOT NULL,
     public_key BYTEA not null,
+    encapsulation_key BYTEA,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     unique (user_id, name)
@@ -48,4 +49,12 @@ CREATE TABLE IF NOT EXISTS known_hosts(
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     UNIQUE (user_id, host_pattern, key_type)
+);
+
+CREATE TABLE IF NOT EXISTS master_key_rotations(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    machine_id uuid NOT NULL REFERENCES machines(id) ON DELETE CASCADE,
+    encrypted_master_key BYTEA NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT (now() AT TIME ZONE 'UTC'),
+    UNIQUE (machine_id)
 );
